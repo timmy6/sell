@@ -6,7 +6,6 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.Date;
 
 /**
  * @author liuqiming
@@ -15,8 +14,8 @@ import java.util.Date;
  * @Description
  */
 @Entity
-@DynamicUpdate
-@Data
+@DynamicUpdate  //时间自动同步
+@Data   //Getter and Setter 方法自动生成
 public class ProductCategory {
 
     /**
@@ -35,4 +34,13 @@ public class ProductCategory {
      * 类目编号
      */
     private Integer categoryType;
+
+    public ProductCategory(String categoryName, Integer categoryType) {
+        this.categoryName = categoryName;
+        this.categoryType = categoryType;
+    }
+
+    public ProductCategory() {
+        
+    }
 }
