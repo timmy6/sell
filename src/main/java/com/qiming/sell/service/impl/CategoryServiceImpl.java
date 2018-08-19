@@ -1,6 +1,6 @@
 package com.qiming.sell.service.impl;
 
-import com.qiming.sell.DataObject.ProductCategory;
+import com.qiming.sell.dataObject.ProductCategory;
 import com.qiming.sell.repository.ProductCategoryRepository;
 import com.qiming.sell.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

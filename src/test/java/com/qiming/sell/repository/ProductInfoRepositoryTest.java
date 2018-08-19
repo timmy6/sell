@@ -1,6 +1,6 @@
 package com.qiming.sell.repository;
 
-import com.qiming.sell.DataObject.ProductInfo;
+import com.qiming.sell.dataObject.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class ProductInfoRepositoryTest {
     //    @Transactional  //不污染数据库
     @Test
     public void addProduct() {
-        ProductInfo productInfo = new ProductInfo("2", "菠萝", "5.00", 10,
-                "这是菠萝", "http://www.baidu.com", 4);
+        ProductInfo productInfo = new ProductInfo("3", "广东肠粉", new BigDecimal(6.00), 20,
+                "很好吃的广东肠粉", "http://www.taobao.com", 2, 0);
         productInfoRepository.save(productInfo);
     }
 
@@ -53,5 +54,11 @@ public class ProductInfoRepositoryTest {
     public void findProductByCategoryIn() {
         List<ProductInfo> productInfos = productInfoRepository.findProductInfoByCategoryTypeIn(Arrays.asList(1));
         Assert.assertNotEquals(0, productInfos);
+    }
+
+    @Test
+    public void findProductByStatus() {
+        List<ProductInfo> productInfos = productInfoRepository.findProductInfoByProductStatus(0);
+        Assert.assertNotEquals(0, productInfos.size());
     }
 }

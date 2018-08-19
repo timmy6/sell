@@ -1,6 +1,6 @@
 package com.qiming.sell.repository;
 
-import com.qiming.sell.DataObject.ProductInfo;
+import com.qiming.sell.dataObject.ProductInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface ProductInfoRepository extends JpaRepository<ProductInfo, String> {
     List<ProductInfo> findProductInfoByCategoryTypeIn(List<Integer> categoryTypeList);
+
+    List<ProductInfo> findProductInfoByProductStatus(int status);
 }

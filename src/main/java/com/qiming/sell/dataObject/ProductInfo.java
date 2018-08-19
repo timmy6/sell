@@ -1,10 +1,11 @@
-package com.qiming.sell.DataObject;
+package com.qiming.sell.dataObject;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 /**
  * @author liuqiming
@@ -16,25 +17,52 @@ import javax.persistence.Id;
 @DynamicUpdate
 @Data
 public class ProductInfo {
+
+    /**
+     * 商品id
+     */
     @Id
     private String productId;
 
+    /**
+     * 商品名称
+     */
     private String productName;
 
-    private String productPrice;    //TODO 数据库的价格对应的类型是？
+    /**
+     * 价格
+     */
+    private BigDecimal productPrice;
 
+    /**
+     * 库存
+     */
     private int productStock;
 
+    /**
+     * 描述
+     */
     private String productDescription;
 
+    /**
+     * 小图
+     */
     private String productIcon;
 
+    /**
+     * 类目编号
+     */
     private int categoryType;
+
+    /**
+     * 状态：上架/下架
+     */
+    private int productStatus;
 
     public ProductInfo() {
     }
 
-    public ProductInfo(String productId, String productName, String productPrice, int productStock, String productDescription, String productIcon, int categoryType) {
+    public ProductInfo(String productId, String productName, BigDecimal productPrice, int productStock, String productDescription, String productIcon, int categoryType, int productStatus) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
@@ -42,5 +70,6 @@ public class ProductInfo {
         this.productDescription = productDescription;
         this.productIcon = productIcon;
         this.categoryType = categoryType;
+        this.productStatus = productStatus;
     }
 }
