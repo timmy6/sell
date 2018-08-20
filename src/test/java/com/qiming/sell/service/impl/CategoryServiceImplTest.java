@@ -1,6 +1,6 @@
 package com.qiming.sell.service.impl;
 
-import com.qiming.sell.dataObject.ProductCategory;
+import com.qiming.sell.dataobject.ProductCategory;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

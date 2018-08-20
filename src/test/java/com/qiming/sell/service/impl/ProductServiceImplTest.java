@@ -1,6 +1,6 @@
 package com.qiming.sell.service.impl;
 
-import com.qiming.sell.dataObject.ProductInfo;
+import com.qiming.sell.dataobject.ProductInfo;
 import com.qiming.sell.enums.ProductStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;

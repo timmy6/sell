@@ -1,6 +1,6 @@
 package com.qiming.sell.repository;
 
-import com.qiming.sell.dataObject.ProductCategory;
+import com.qiming.sell.dataobject.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.qiming.sell.repository;
 
-import com.qiming.sell.dataObject.ProductInfo;
+import com.qiming.sell.dataobject.ProductInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

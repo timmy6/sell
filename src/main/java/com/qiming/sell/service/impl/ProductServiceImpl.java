@@ -1,6 +1,6 @@
 package com.qiming.sell.service.impl;
 
-import com.qiming.sell.dataObject.ProductInfo;
+import com.qiming.sell.dataobject.ProductInfo;
 import com.qiming.sell.enums.ProductStatusEnum;
 import com.qiming.sell.repository.ProductInfoRepository;
 import com.qiming.sell.service.ProductService;

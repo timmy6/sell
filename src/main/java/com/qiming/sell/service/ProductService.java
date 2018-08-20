@@ -1,6 +1,6 @@
 package com.qiming.sell.service;
 
-import com.qiming.sell.dataObject.ProductInfo;
+import com.qiming.sell.dataobject.ProductInfo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

@@ -2,8 +2,8 @@ package com.qiming.sell.controller;
 
 import com.qiming.sell.base.BaseController;
 import com.qiming.sell.common.ret.RetResult;
-import com.qiming.sell.dataObject.ProductCategory;
-import com.qiming.sell.dataObject.ProductInfo;
+import com.qiming.sell.dataobject.ProductCategory;
+import com.qiming.sell.dataobject.ProductInfo;
 import com.qiming.sell.service.CategoryService;
 import com.qiming.sell.service.ProductService;
 import com.qiming.sell.vo.ProductInfoVO;

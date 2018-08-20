@@ -1,6 +1,6 @@
 package com.qiming.sell.service;
 
-import com.qiming.sell.dataObject.ProductCategory;
+import com.qiming.sell.dataobject.ProductCategory;
 
 import java.util.List;
 

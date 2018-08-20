@@ -1,4 +1,4 @@
-package com.qiming.sell.dataObject;
+package com.qiming.sell.dataobject;
 
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
