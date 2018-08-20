@@ -52,17 +52,17 @@ public class ProductInfo {
     /**
      * 类目编号
      */
-    private int categoryType;
+    private Integer categoryType;
 
     /**
-     * 状态：上架/下架
+     * 状态：0下架/1上架
      */
     private int productStatus;
 
     public ProductInfo() {
     }
 
-    public ProductInfo(String productId, String productName, BigDecimal productPrice, int productStock, String productDescription, String productIcon, int categoryType, int productStatus) {
+    public ProductInfo(String productId, String productName, BigDecimal productPrice, int productStock, String productDescription, String productIcon, Integer categoryType, int productStatus) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
