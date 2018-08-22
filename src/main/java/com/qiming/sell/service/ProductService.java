@@ -1,6 +1,7 @@
 package com.qiming.sell.service;
 
 import com.qiming.sell.dataobject.ProductInfo;
+import com.qiming.sell.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -25,7 +26,9 @@ public interface ProductService {
 
     List<ProductInfo> findProductInfoByStatus(int status);
 
-
     //加库存
+    void increaseStock(List<CartDTO> cartDTOList);
+
     //减库存
+    void decreaseStock(List<CartDTO> cartDTOList);
 }
