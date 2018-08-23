@@ -2,8 +2,7 @@ package com.qiming.sell.service;
 
 import com.qiming.sell.dto.OrderDTO;
 import org.springframework.data.domain.Page;
-
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 
 /**
  * @author liuqiming

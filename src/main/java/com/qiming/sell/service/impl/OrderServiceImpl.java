@@ -1,5 +1,6 @@
 package com.qiming.sell.service.impl;
 
+import com.qiming.sell.converter.OrderMaster2OrderDTOConverter;
 import com.qiming.sell.dataobject.OrderDetail;
 import com.qiming.sell.dataobject.OrderMaster;
 import com.qiming.sell.dataobject.ProductInfo;
@@ -17,10 +18,11 @@ import com.qiming.sell.utils.KeyUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.print.Pageable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -82,22 +84,49 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO findOne(String orderId) {
-        return null;
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderId);
+        if (orderMaster == null) {
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        List<OrderDetail> orderDetails = orderDetailRepository.findByOrderId(orderId);
+        if (orderDetails == null) {
+            throw new SellException(ResultEnum.ORDER_DETAIL_NOT_EXIST);
+        }
+        OrderDTO orderDTO = new OrderDTO();
+        BeanUtils.copyProperties(orderMaster, orderDTO);
+        orderDTO.setOrderDetailList(orderDetails);
+        return orderDTO;
     }
 
     @Override
     public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
-        return null;
+        Page<OrderMaster> orderMasters = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);//不需要查详情
+        List<OrderDTO> orderDTOS = OrderMaster2OrderDTOConverter.convert(orderMasters.getContent());
+        return new PageImpl<OrderDTO>(orderDTOS, pageable, orderMasters.getSize());
     }
 
     @Override
     public OrderDTO cancel(OrderDTO orderDTO) {
-        return null;
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
+        if (orderMaster == null) {
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        orderMaster.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        orderMasterRepository.save(orderMaster);
+        orderDTO.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
+        return orderDTO;
     }
 
     @Override
     public OrderDTO finish(OrderDTO orderDTO) {
-        return null;
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
+        if (orderMaster == null) {
+            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        orderMaster.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        orderMasterRepository.save(orderMaster);
+        orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        return orderDTO;
     }
 
     @Override
