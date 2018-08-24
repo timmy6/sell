@@ -2,6 +2,8 @@ package com.qiming.sell.service.impl;
 
 import com.qiming.sell.dataobject.OrderDetail;
 import com.qiming.sell.dto.OrderDTO;
+import com.qiming.sell.enums.OrderStatusEnum;
+import com.qiming.sell.enums.PayStatusEnum;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,13 +73,59 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(), result.getOrderStatus());
     }
 
     @Test
     public void finish() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(), result.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO orderDTO = orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(), result.getPayStatus());
+    }
+
+    public char[] reverse(char[] chars, int start, int end) {   // " hello world "
+        if (chars == null || chars.length == 0 || start < 0 || end >= chars.length || start >= end) {
+            return chars;
+        }
+        while (start < end) {
+            char temp = chars[start];
+            chars[start] = chars[end];
+            chars[end] = temp;
+            start++;
+            end--;
+        }
+        return chars;
+    }
+
+    public String solution(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        int length = str.length();
+        //第一步，翻转所有字符串
+        char[] chars = reverse(str.toCharArray(), 0, str.length());
+        //第二部，翻转每个单词
+        int start = 0, end = 0;
+        while (start < length) {
+            if (chars[start] == ' ') {
+                start++;
+                end++;
+            } else if (end == length || chars[end] == ' ') {
+                chars = reverse(chars, start, end - 1);
+                start = end++;
+            } else {
+                end++;
+            }
+        }
+        return new String(chars);
     }
 }

@@ -106,6 +106,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO cancel(OrderDTO orderDTO) {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
         if (orderMaster == null) {
@@ -118,19 +119,43 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderDTO finish(OrderDTO orderDTO) {
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
         OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
         if (orderMaster == null) {
-            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
-        orderMaster.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
-        orderMasterRepository.save(orderMaster);
         orderDTO.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        orderMaster.setOrderStatus(OrderStatusEnum.FINISHED.getCode());
+        OrderMaster updateResult = orderMasterRepository.save(orderMaster);
+        if (updateResult == null) {
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
         return orderDTO;
     }
 
     @Override
+    @Transactional
     public OrderDTO paid(OrderDTO orderDTO) {
-        return null;
+        //判断订单状态
+        if (!orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
+        }
+        //判断支付状态
+        if (!orderDTO.getPayStatus().equals(PayStatusEnum.WAIT.getCode())) {
+            throw new SellException(ResultEnum.ORDER_PAY_STATUS_ERROR);
+        }
+        //修改支付状态
+        OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
+        orderMaster.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        orderDTO.setPayStatus(PayStatusEnum.SUCCESS.getCode());
+        OrderMaster result = orderMasterRepository.save(orderMaster);
+        if (result == null) {
+            throw new SellException(ResultEnum.ORDER_UPDATE_FAIL);
+        }
+        return orderDTO;
     }
 }
