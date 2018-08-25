@@ -7,6 +7,7 @@ import com.qiming.sell.service.BuyerService;
 import com.qiming.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author liuqiming
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Description
  */
 @Slf4j
+@Service
 public class BuyerServiceImpl implements BuyerService {
 
     @Autowired

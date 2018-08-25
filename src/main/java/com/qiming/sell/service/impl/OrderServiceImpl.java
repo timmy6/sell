@@ -15,6 +15,7 @@ import com.qiming.sell.repository.OrderMasterRepository;
 import com.qiming.sell.service.OrderService;
 import com.qiming.sell.service.ProductService;
 import com.qiming.sell.utils.KeyUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +36,7 @@ import java.util.stream.Collectors;
  * @Description
  */
 @Service
+@Slf4j
 public class OrderServiceImpl implements OrderService {
 
     @Autowired
@@ -112,6 +114,10 @@ public class OrderServiceImpl implements OrderService {
         OrderMaster orderMaster = orderMasterRepository.findOne(orderDTO.getOrderId());
         if (orderMaster == null) {
             throw new SellException(ResultEnum.ORDER_NOT_EXIST);
+        }
+        if (orderDTO.getOrderStatus().equals(OrderStatusEnum.NEW.getCode())) {
+            log.error("【取消订单】订单状态不正确 orderId={},orderStatus={}", orderDTO.getOrderId(), orderDTO.getOrderStatus());
+            throw new SellException(ResultEnum.ORDER_STATUS_ERROR);
         }
         orderMaster.setOrderStatus(OrderStatusEnum.CANCEL.getCode());
         orderMasterRepository.save(orderMaster);
