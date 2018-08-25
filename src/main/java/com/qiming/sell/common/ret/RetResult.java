@@ -6,9 +6,10 @@ package com.qiming.sell.common.ret;
  * @email liuqiminggood@gmail.com
  * @Description 返回对象实体
  */
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class RetResult<T> {
     public int code;
-    private String msg;
+    private String msg = "";
     private T data;
 
     public RetResult<T> setCode(RetCode retCode) {

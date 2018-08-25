@@ -1,6 +1,8 @@
 package com.qiming.sell.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.qiming.sell.dataobject.OrderDetail;
+import com.qiming.sell.utils.serializer.Date2LongSerializer;
 import lombok.Data;
 
 import javax.persistence.Id;
@@ -15,6 +17,8 @@ import java.util.List;
  * @Description dto专门用来在数据层传输用的, data transiform object
  */
 @Data
+//@JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
 
     /**
@@ -61,11 +65,13 @@ public class OrderDTO {
     /**
      * 创建时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date createTime;
 
     /**
      * 修改时间
      */
+    @JsonSerialize(using = Date2LongSerializer.class)
     private Date updateTime;
 
     /**
