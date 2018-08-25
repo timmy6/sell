@@ -7,6 +7,7 @@ import com.qiming.sell.dto.OrderDTO;
 import com.qiming.sell.enums.ResultEnum;
 import com.qiming.sell.exception.SellException;
 import com.qiming.sell.form.OrderForm;
+import com.qiming.sell.service.BuyerService;
 import com.qiming.sell.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class BuyerOrderController extends BaseController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private BuyerService buyerService;
 
     //创建订单
 
@@ -81,11 +85,7 @@ public class BuyerOrderController extends BaseController {
      */
     @GetMapping("/detail")
     public RetResult<OrderDTO> detail(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
-        //TODO  不安全的做法、改进
-        OrderDTO orderDTO = orderService.findOne(orderId);
-        if (orderDTO == null) {
-            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
-        }
+        OrderDTO orderDTO = buyerService.findOrderOne(openid, orderId);
         return makeOKRsp(orderDTO);
     }
 
@@ -98,12 +98,7 @@ public class BuyerOrderController extends BaseController {
      */
     @PostMapping("/cancel")
     public RetResult cancel(@RequestParam("openid") String openid, @RequestParam("orderId") String orderId) {
-        //TODO  不安全的做法、改进
-        OrderDTO orderDTO = orderService.findOne(orderId);
-        if (orderDTO == null) {
-            throw new SellException(ResultEnum.ORDER_NOT_EXIST);
-        }
-        orderService.cancel(orderDTO);
+        OrderDTO orderDTO = buyerService.cancelOrder(openid, orderId);
         return makeOKRsp();
     }
 }
