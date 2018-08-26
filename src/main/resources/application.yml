@@ -21,3 +21,6 @@ wechat:
   mpAppId: 123AD2Asfasd  #随便写的
   mpAppSecret: 123hkjhkhkh123 #随便写的
   redirectURl: 123123132 #随便写的
+  mchId: 12312312312
+  mchKey: 123123123123123123
+  keyPath: /var/weixin_cert/h5.p12
