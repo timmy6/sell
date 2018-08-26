@@ -15,3 +15,9 @@ logging:
     console: "%d --- %msg%n"
   level: error
   file: sell.log
+
+
+wechat:
+  mpAppId: 123AD2Asfasd  #随便写的
+  mpAppSecret: 123hkjhkhkh123 #随便写的
+  redirectURl: 123123132 #随便写的
