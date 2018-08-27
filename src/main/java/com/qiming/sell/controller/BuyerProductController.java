@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
  * @email liuqiminggood@gmail.com
  * @Description
  */
+@SuppressWarnings("LambdaBodyCanBeCodeBlock")
 @RestController
 @RequestMapping("/buyer/product")
 public class BuyerProductController extends BaseController {

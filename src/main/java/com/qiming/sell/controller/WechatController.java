@@ -30,6 +30,7 @@ public class WechatController {
     @Autowired
     private WxMpService wxMpService;
 
+    @SuppressWarnings("deprecation")
     @GetMapping("/authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         WxMpService wxMpService = new WxMpServiceImpl();
