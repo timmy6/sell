@@ -60,4 +60,6 @@ public interface OrderService {
      * @return
      */
     OrderDTO paid(OrderDTO orderDTO);
+
+    Page<OrderDTO> findList(Pageable pageable);
 }

@@ -9,10 +9,9 @@ import lombok.Getter;
  * @Description 支付状态
  */
 @Getter
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnum {
     WAIT(0, "等待支付"),
-    SUCCESS(1,"支付成功"),
-    ;
+    SUCCESS(1, "支付成功"),;
 
     private Integer code;
     private String msg;

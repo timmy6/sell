@@ -128,4 +128,12 @@ public class OrderServiceImplTest {
         }
         return new String(chars);
     }
+
+    @Test
+    public void findAll() {
+        PageRequest pageRequest = new PageRequest(0, 2);
+        Page<OrderDTO> orderDTOPage = orderService.findList(pageRequest);
+        Assert.assertNotEquals(0, orderDTOPage.getContent().size());
+        Assert.assertTrue("查询所有订单列表", orderDTOPage.getContent().size() > 0);
+    }
 }
